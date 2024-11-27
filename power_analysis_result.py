@@ -3,13 +3,7 @@ from scipy.stats import f_oneway
 
 def load_dataset(file_path):
     """
-    Load the dataset from an Excel file 
-
-    Args:
-        file_path (str): Path to the Excel file.
-
-    Returns:
-        pd.DataFrame: Loaded dataset with the Date column in datetime format.
+    Load the dataset from an Excel file .
     """
     data = pd.read_excel(file_path)
     data["Date"] = pd.to_datetime(data["Date"])
@@ -18,13 +12,6 @@ def load_dataset(file_path):
 def perform_anova(column1, column2):
     """
     Perform a one-way ANOVA test between two columns.
-
-    Args:
-        column1 (pd.Series): First column for comparison.
-        column2 (pd.Series): Second column for comparison.
-
-    Returns:
-        tuple: F-statistic and p-value from the ANOVA test.
     """
     result = f_oneway(column1.dropna(), column2.dropna())
     return result.statistic, result.pvalue
@@ -33,10 +20,6 @@ def display_anova_results(name, f_stat, p_value):
     """
     Display the results of the ANOVA test in a formatted manner.
 
-    Args:
-        name (str): Name of the comparison (e.g., "Orders").
-        f_stat (float): F-statistic from the ANOVA test.
-        p_value (float): p-value from the ANOVA test.
     """
     print(f"{name} ANOVA Results:")
     print(f"F-Statistic: {f_stat:.4f}")
